@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: {
-    default: "SpinRoster — Free Classroom Spin Wheel for Teachers",
+    default: "SpinRoster  Free Classroom Spin Wheel for Teachers",
     template: "%s | SpinRoster",
   },
   description:
@@ -20,7 +20,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "https://classromwheel.vercel.app",
-    title: "SpinRoster — Free Classroom Spin Wheel for Teachers",
+    title: "SpinRoster  Free Classroom Spin Wheel for Teachers",
     description: "Pick random students fairly, save class rosters, spin on your projector. Free, no signup.",
     siteName: "SpinRoster",
     locale: "en_US",
