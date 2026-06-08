@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 
 function useIsMobile() {
@@ -115,7 +116,7 @@ function WheelCanvas({ names, spinning, onSpinEnd, highlightIndex }) {
   }, [spinning, names.length, draw]);
 
   return (
-    <div style={{ position: "relative", display: "inline-block", width: "clamp(360px, 40vw, 520px)", maxWidth: 520 }}>
+    <div style={{ position: "relative", display: "inline-block", width: "min(360px, 85vw)", maxWidth: 360 }}>
       <div style={{
         position: "absolute", top: "50%", right: -14, transform: "translateY(-50%)",
         width: 0, height: 0,
@@ -123,9 +124,9 @@ function WheelCanvas({ names, spinning, onSpinEnd, highlightIndex }) {
         borderRight: "26px solid #ffffff",
         filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.8))", zIndex: 10
       }} />
-      <canvas ref={canvasRef} width={520} height={520} style={{
+      <canvas ref={canvasRef} width={360} height={360} style={{
         borderRadius: "50%", display: "block", width: "100%", height: "auto",
-        maxWidth: 520,
+        maxWidth: 360,
         boxShadow: "0 0 0 3px rgba(106,100,255,0.5), 0 0 24px rgba(106,100,255,0.15)"
       }} />
     </div>
@@ -136,7 +137,7 @@ function CountdownOverlay({ countdown, studentName }) {
   const isReveal = countdown === "reveal";
   return (
     <div style={{
-      width: "clamp(360px, 40vw, 520px)", height: "clamp(360px, 40vw, 520px)", borderRadius: "50%",
+      width: "min(360px, 90vw)", height: "min(360px, 90vw)", borderRadius: "50%",
       background: "radial-gradient(circle at center, #1e1b4e 0%, #0d0d1a 100%)",
       boxShadow: "0 0 0 3px rgba(253,121,168,0.5), 0 0 30px rgba(106,100,255,0.2)",
       display: "flex", flexDirection: "column",
@@ -516,14 +517,14 @@ export default function ClassroomWheel() {
         </div>
       )}
 
-      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr min(420px, 30%)", gap: isMobile ? 16 : 32, maxWidth: 1600, margin: "0 auto", padding: isMobile ? "16px 12px" : "32px 48px", alignItems: "start" }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 380px", gap: isMobile ? 16 : 24, maxWidth: 1100, margin: "0 auto", padding: isMobile ? "16px 12px" : "24px 16px", alignItems: "start" }}>
 
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 20, minWidth: 0 }}>
 
           {winner && (
             <div style={{ textAlign: "center", animation: "winner-reveal 0.5s cubic-bezier(0.34,1.56,0.64,1)", width: "100%", maxWidth: 420, padding: "8px 0" }}>
               <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", letterSpacing: "0.2em", fontWeight: 600, marginBottom: 6 }}>PICKED</div>
-              <div style={{ fontSize: isMobile ? 42 : "clamp(58px, 5vw, 86px)", fontWeight: 800, letterSpacing: "-2px", color: "#fff", lineHeight: 1, textShadow: "0 2px 20px rgba(162,155,254,0.4)" }}>{winner.name}</div>
+              <div style={{ fontSize: isMobile ? 42 : 58, fontWeight: 800, letterSpacing: "-2px", color: "#fff", lineHeight: 1, textShadow: "0 2px 20px rgba(162,155,254,0.4)" }}>{winner.name}</div>
               <div style={{ marginTop: 8, height: 3, borderRadius: 99, background: "linear-gradient(90deg, #6a64ff, #fd79a8)", maxWidth: 120, margin: "10px auto 0" }} />
             </div>
           )}
@@ -551,14 +552,14 @@ export default function ClassroomWheel() {
                 onSpinEnd={handleSpinEnd}
                 highlightIndex={highlightIndex}
               />
-              <canvas ref={confettiRef} width={520} height={520} style={{
+              <canvas ref={confettiRef} width={360} height={360} style={{
                 position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
                 pointerEvents: "none", borderRadius: "50%"
               }} />
             </div>
           )}
 
-          <button onClick={handleSpin} disabled={isDisabled} style={{ width: isMobile ? "100%" : "clamp(240px, 22vw, 320px)", height: isMobile ? 56 : "clamp(60px, 5vh, 72px)", borderRadius: 999, background: isDisabled ? "rgba(255,255,255,0.1)" : isLastOne ? "linear-gradient(135deg, #e17055, #fd79a8)" : "linear-gradient(135deg, #6a64ff, #fd79a8)", border: "none", color: "#fff", fontSize: isLastOne ? 14 : 18, fontWeight: 800, cursor: isDisabled ? "not-allowed" : "pointer", letterSpacing: isLastOne ? 0 : "-0.5px", fontFamily: "inherit", boxShadow: isDisabled ? "none" : "0 8px 32px rgba(106,100,255,0.5)", transition: "all 0.2s" }}>
+          <button onClick={handleSpin} disabled={isDisabled} style={{ width: isMobile ? "100%" : "min(260px, 85vw)", height: isMobile ? 56 : 60, borderRadius: 999, background: isDisabled ? "rgba(255,255,255,0.1)" : isLastOne ? "linear-gradient(135deg, #e17055, #fd79a8)" : "linear-gradient(135deg, #6a64ff, #fd79a8)", border: "none", color: "#fff", fontSize: isLastOne ? 14 : 18, fontWeight: 800, cursor: isDisabled ? "not-allowed" : "pointer", letterSpacing: isLastOne ? 0 : "-0.5px", fontFamily: "inherit", boxShadow: isDisabled ? "none" : "0 8px 32px rgba(106,100,255,0.5)", transition: "all 0.2s" }}>
             {spinning ? "Spinning…" : countdown !== null ? "⏳ Revealing..." : eligibleStudents.length === 0 ? "All Picked! ✓" : isLastOne ? "🎭 Reveal last student" : "SPIN"}
           </button>
 
