@@ -31,7 +31,7 @@ const SAMPLE_NAMES = [
   "Emma","Liam","Olivia","Noah","Ava"
 ];
 
-function WheelCanvas({ names, spinning, onSpinEnd, highlightIndex }) {
+function WheelCanvas({ names, spinning, onSpinEnd, highlightIndex, size = 360 }) {
   const canvasRef = useRef(null);
   const angleRef = useRef(0);
   const rafRef = useRef(null);
@@ -115,7 +115,7 @@ function WheelCanvas({ names, spinning, onSpinEnd, highlightIndex }) {
   }, [spinning, names.length, draw]);
 
   return (
-    <div style={{ position: "relative", display: "inline-block", width: "min(360px, 85vw)", maxWidth: 360 }}>
+    <div style={{ position: "relative", display: "inline-block", width: `min(${size}px, 85vw)`, maxWidth: size }}>
       <div style={{
         position: "absolute", top: "50%", right: -14, transform: "translateY(-50%)",
         width: 0, height: 0,
@@ -123,20 +123,20 @@ function WheelCanvas({ names, spinning, onSpinEnd, highlightIndex }) {
         borderRight: "26px solid #ffffff",
         filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.8))", zIndex: 10
       }} />
-      <canvas ref={canvasRef} width={360} height={360} style={{
+      <canvas ref={canvasRef} width={size} height={size} style={{
         borderRadius: "50%", display: "block", width: "100%", height: "auto",
-        maxWidth: 360,
+        maxWidth: size,
         boxShadow: "0 0 0 3px rgba(106,100,255,0.5), 0 0 24px rgba(106,100,255,0.15)"
       }} />
     </div>
   );
 }
 
-function CountdownOverlay({ countdown, studentName }) {
+function CountdownOverlay({ countdown, studentName, size = 360 }) {
   const isReveal = countdown === "reveal";
   return (
     <div style={{
-      width: "min(360px, 90vw)", height: "min(360px, 90vw)", borderRadius: "50%",
+      width: `min(${size}px, 90vw)`, height: `min(${size}px, 90vw)`, borderRadius: "50%",
       background: "radial-gradient(circle at center, #1e1b4e 0%, #0d0d1a 100%)",
       boxShadow: "0 0 0 3px rgba(253,121,168,0.5), 0 0 30px rgba(106,100,255,0.2)",
       display: "flex", flexDirection: "column",
@@ -852,13 +852,19 @@ export default function ClassroomWheel() {
             )}
           </div>
 
+          {/* Main content row: wheel + roster */}
+          <div style={{
+            display: "flex", alignItems: "flex-start", justifyContent: "center",
+            gap: 32, marginTop: 60, width: "100%", padding: "0 24px", flexWrap: "wrap"
+          }}>
+
           {/* Main wheel area */}
           <div style={{
             display: "flex", flexDirection: "column", alignItems: "center",
-            gap: 32, marginTop: 60
+            gap: 32
           }}>
             {countdown !== null ? (
-              <CountdownOverlay countdown={countdown} studentName={lastStudent?.name} />
+              <CountdownOverlay countdown={countdown} studentName={lastStudent?.name} size={460} />
             ) : (
               <div style={{ position: "relative" }}>
                 {isLastOne && !spinning && (
@@ -872,6 +878,7 @@ export default function ClassroomWheel() {
                   spinning={spinning}
                   onSpinEnd={handleSpinEnd}
                   highlightIndex={highlightIndex}
+                  size={460}
                 />
               </div>
             )}
@@ -907,6 +914,24 @@ export default function ClassroomWheel() {
                 </button>
               )}
             </div>
+          </div>
+
+          {/* Roster panel */}
+          <div style={{ width: 280, maxWidth: "90vw", maxHeight: "min(640px, 75vh)", overflowY: "auto", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: "16px 18px" }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "rgba(255,255,255,0.4)", letterSpacing: "0.15em", marginBottom: 10 }}>ROSTER</div>
+            {(activeClass?.students || []).map((s, i) => (
+              <div key={s.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "6px 0" }}>
+                <div style={{ width: 10, height: 10, borderRadius: "50%", flexShrink: 0, background: s.absent ? "#636e72" : COLORS[i % COLORS.length] }} />
+                <span style={{ flex: 1, fontSize: 16, fontWeight: 500, color: s.absent ? "rgba(255,255,255,0.25)" : s.picked ? "rgba(162,155,254,0.6)" : "rgba(255,255,255,0.85)", textDecoration: (s.absent || s.picked) ? "line-through" : "none" }}>{s.name}</span>
+                {s.picked && !s.absent && (<span style={{ fontSize: 14, color: "#a29bfe", fontWeight: 700 }}>✓</span>)}
+                {s.absent && (<span style={{ fontSize: 13, opacity: 0.5 }}>🚫</span>)}
+              </div>
+            ))}
+            {(!activeClass?.students || activeClass.students.length === 0) && (
+              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.25)", padding: "12px 0" }}>No students added yet</div>
+            )}
+          </div>
+
           </div>
 
           {/* Bottom hint */}
