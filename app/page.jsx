@@ -471,6 +471,20 @@ export default function ClassroomWheel() {
 
   const toggleAbsent = id => updateClass(activeClassId, c => ({ ...c, students: c.students.map(s => s.id === id ? { ...s, absent: !s.absent } : s) }));
   const removeStudent = id => updateClass(activeClassId, c => ({ ...c, students: c.students.filter(s => s.id !== id) }));
+  const clearAllStudents = () => {
+    if (!activeClass || activeClass.students.length === 0) return;
+    if (!window.confirm(`Remove all ${activeClass.students.length} students from "${activeClass.name}"? This can't be undone.`)) return;
+    countdownTimers.current.forEach(t => clearTimeout(t));
+    countdownTimers.current = [];
+    setCountdown(null);
+    setLastStudent(null);
+    setSpinning(false);
+    setWinner(null);
+    setHighlightIndex(null);
+    setLastPick(null);
+    updateClass(activeClassId, c => ({ ...c, students: [] }));
+    setWheelKey(k => k + 1);
+  };
   const addClass = () => {
     const name = newClassName.trim() || "New Class";
     const id = Date.now().toString();
@@ -716,7 +730,12 @@ export default function ClassroomWheel() {
               <div style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", marginTop: 2 }}>{activeClass?.students.length || 0} students</div>
               </div>
             </div>
-            <button onClick={() => setShowPaste(v => !v)} style={{ padding: "6px 12px", borderRadius: 8, background: "rgba(106,100,255,0.15)", border: "1px solid rgba(106,100,255,0.3)", color: "#a29bfe", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>📋 Import</button>
+            <div style={{ display: "flex", gap: 8 }}>
+              {activeClass?.students.length > 0 && (
+                <button onClick={clearAllStudents} title="Remove all students from this class" style={{ padding: "6px 12px", borderRadius: 8, background: "rgba(220,38,38,0.12)", border: "1px solid rgba(220,38,38,0.3)", color: "#fca5a5", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>🗑 Clear all</button>
+              )}
+              <button onClick={() => setShowPaste(v => !v)} style={{ padding: "6px 12px", borderRadius: 8, background: "rgba(106,100,255,0.15)", border: "1px solid rgba(106,100,255,0.3)", color: "#a29bfe", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>📋 Import</button>
+            </div>
           </div>
 
           {(!isMobile || showRoster) && showPaste && (
