@@ -28,8 +28,7 @@ const COLORS = [
 ];
 
 const SAMPLE_NAMES = [
-  "Emma","Liam","Olivia","Noah","Ava","Oliver","Isabella","Elijah",
-  "Sophia","Lucas","Mia","Mason","Charlotte","Logan","Amelia"
+  "Emma","Liam","Olivia","Noah","Ava"
 ];
 
 function WheelCanvas({ names, spinning, onSpinEnd, highlightIndex }) {
