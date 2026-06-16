@@ -975,6 +975,16 @@ export default function ClassroomWheel() {
       )}
 
       {!projector && (
+        <div style={{ textAlign: "center", padding: "24px 16px 0", display: "flex", justifyContent: "center", gap: 24 }}>
+          {[["About", "/about"], ["Privacy Policy", "/privacy-policy"]].map(([label, href]) => (
+            <a key={href} href={href} style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", textDecoration: "none", fontFamily: "'DM Sans','Segoe UI',sans-serif" }}>
+              {label}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {!projector && (
         <div style={{ maxWidth: 960, margin: "0 auto", padding: "56px 24px 72px", fontFamily: "'DM Sans','Segoe UI',sans-serif", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <h1 style={{ fontSize: 28, fontWeight: 800, color: "rgba(255,255,255,0.75)", marginBottom: 12, letterSpacing: "-0.5px" }}>
             Free Classroom Spin Wheel for Teachers
