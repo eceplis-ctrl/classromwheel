@@ -214,6 +214,7 @@ export default function ClassroomWheel() {
   const [teams, setTeams] = useState([]);
   const [showShortcuts, setShowShortcuts] = useState(false);
   const audioCtxRef = useRef(null);
+  const [storageLoaded, setStorageLoaded] = useState(false);
 
   const activeClass = classes.find(c => c.id === activeClassId) || classes[0];
   const isCorrectClass = activeClass?.id === activeClassId;
@@ -401,7 +402,35 @@ export default function ClassroomWheel() {
     return () => window.removeEventListener("keydown", onKey);
   }, [projector]);
 
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("cw_classes");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length) setClasses(parsed);
+      }
+      const savedId = localStorage.getItem("cw_active");
+      if (savedId) setActiveClassId(savedId);
+      const savedNoRepeat = localStorage.getItem("cw_noRepeat");
+      if (savedNoRepeat !== null) setNoRepeat(savedNoRepeat === "true");
+    } catch {}
+    setStorageLoaded(true);
+  }, []);
 
+  useEffect(() => {
+    if (!storageLoaded) return;
+    try { localStorage.setItem("cw_classes", JSON.stringify(classes)); } catch {}
+  }, [classes, storageLoaded]);
+
+  useEffect(() => {
+    if (!storageLoaded) return;
+    try { localStorage.setItem("cw_active", activeClassId); } catch {}
+  }, [activeClassId, storageLoaded]);
+
+  useEffect(() => {
+    if (!storageLoaded) return;
+    try { localStorage.setItem("cw_noRepeat", String(noRepeat)); } catch {}
+  }, [noRepeat, storageLoaded]);
 
   const handleSpin = () => {
     handleSpinRef.current = handleSpin;
