@@ -538,7 +538,7 @@ export default function ClassroomWheel() {
       <div style={{ background: "rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.08)", padding: isMobile ? "10px 14px" : "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span style={{ fontSize: 24 }}>🎡</span>
-          <span style={{ fontSize: isMobile ? 16 : 18, fontWeight: 700, letterSpacing: "-0.5px" }}>ClassWheel</span>
+          <span style={{ fontSize: isMobile ? 16 : 18, fontWeight: 700, letterSpacing: "-0.5px" }}>ClassroomWheel</span>
           <span style={{ fontSize: 11, background: "rgba(106,100,255,0.3)", color: "#a29bfe", padding: "2px 8px", borderRadius: 99, fontWeight: 600 }}>BETA</span>
         </div>
         <div style={{ display: "flex", gap: 6, flexWrap: isMobile ? "nowrap" : "wrap", alignItems: "center", overflowX: isMobile ? "auto" : "visible", maxWidth: isMobile ? "calc(100vw - 120px)" : "none", paddingBottom: isMobile ? 2 : 0 }}>
@@ -971,6 +971,35 @@ export default function ClassroomWheel() {
           }}>
             SPACE to spin  •  ESC to exit
           </div>
+        </div>
+      )}
+
+      {!projector && (
+        <div style={{ maxWidth: 960, margin: "0 auto", padding: "56px 24px 72px", fontFamily: "'DM Sans','Segoe UI',sans-serif", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+          <h1 style={{ fontSize: 28, fontWeight: 800, color: "rgba(255,255,255,0.75)", marginBottom: 12, letterSpacing: "-0.5px" }}>
+            Free Classroom Spin Wheel for Teachers
+          </h1>
+          <p style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(255,255,255,0.4)", marginBottom: 40, maxWidth: 680 }}>
+            ClassroomWheel is a free random student picker built for teachers. Spin the wheel to call on students fairly,
+            save multiple class rosters, and display everything full-screen on your smartboard or projector — no account needed.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))", gap: 28, marginBottom: 40 }}>
+            {[
+              { title: "No-Repeat Mode", body: "Students are removed from the wheel after being picked, so everyone gets a turn before anyone repeats." },
+              { title: "Save Multiple Classes", body: "Create a separate roster for each class period. Data stays in your browser — nothing ever leaves your device." },
+              { title: "Projector Mode", body: "One click puts the wheel full-screen on your smartboard. Press Space to spin without touching your keyboard." },
+              { title: "No Signup Required", body: "Open the site and start spinning immediately. Free forever, no account or installation needed." },
+            ].map(({ title, body }) => (
+              <div key={title}>
+                <h2 style={{ fontSize: 15, fontWeight: 700, color: "rgba(255,255,255,0.55)", marginBottom: 6, marginTop: 0 }}>{title}</h2>
+                <p style={{ fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,0.3)", margin: 0 }}>{body}</p>
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 13, lineHeight: 1.7, color: "rgba(255,255,255,0.25)", maxWidth: 680, margin: 0 }}>
+            Looking for a wheel of names for your classroom? ClassroomWheel lets you build your class list, mark students absent,
+            undo a pick, generate random teams, and export pick history as CSV — all free, with no ads until you consent.
+          </p>
         </div>
       )}
 
