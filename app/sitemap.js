@@ -1,8 +1,8 @@
 // app/sitemap.js — Next.js generates /sitemap.xml automatically from this file
-// Submit the URL https://www.spinroster.com/sitemap.xml to Google Search Console
+// Submit the URL https://classroomwheel.com/sitemap.xml to Google Search Console
 
 export default function sitemap() {
-  const baseUrl = "https://www.spinroster.com";
+  const baseUrl = "https://classroomwheel.com";
   const lastModified = new Date();
 
   return [

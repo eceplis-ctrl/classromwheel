@@ -1,6 +1,6 @@
 export const metadata = {
   title: "Privacy Policy",
-  description: "Privacy policy for SpinRoster — how we handle your data.",
+  description: "Privacy policy for ClassroomWheel — how we handle your data.",
   robots: { index: true, follow: true },
 };
 
@@ -15,18 +15,18 @@ export default function PrivacyPolicy() {
       lineHeight: 1.7,
     }}>
       <a href="/" style={{ fontSize: 14, color: "#6a64ff", textDecoration: "none", display: "inline-block", marginBottom: 32 }}>
-        ← Back to SpinRoster
+        ← Back to ClassroomWheel
       </a>
 
       <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 8, letterSpacing: "-1px" }}>Privacy Policy</h1>
       <p style={{ color: "#666", fontSize: 14, marginBottom: 40 }}>Last updated: {new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</p>
 
       <Section title="1. Who we are">
-        SpinRoster ("we", "our", or "us") operates the website at spinroster.com — a free classroom spin wheel tool for teachers. We are based in Latvia, European Union.
+        ClassroomWheel ("we", "our", or "us") operates the website at classroomwheel.com — a free classroom spin wheel tool for teachers. We are based in Latvia, European Union.
       </Section>
 
       <Section title="2. What data we collect">
-        <strong>We do not collect personal data.</strong> SpinRoster stores your class rosters and settings only in your browser's local storage. This data never leaves your device and is never sent to our servers.
+        <strong>We do not collect personal data.</strong> ClassroomWheel stores your class rosters and settings only in your browser's local storage. This data never leaves your device and is never sent to our servers.
         <br /><br />
         The only data we receive is:
         <ul>
@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
       </Section>
 
       <Section title="3. Cookies">
-        SpinRoster itself does not set cookies. However, we use Google AdSense to display advertisements, which may set cookies on your device to show relevant ads. You can manage or opt out of personalised advertising at <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" style={{ color: "#6a64ff" }}>adssettings.google.com</a>.
+        ClassroomWheel itself does not set cookies. However, we use Google AdSense to display advertisements, which may set cookies on your device to show relevant ads. You can manage or opt out of personalised advertising at <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" style={{ color: "#6a64ff" }}>adssettings.google.com</a>.
         <br /><br />
         We ask for your consent before AdSense cookies are set (see the cookie banner on your first visit).
       </Section>
@@ -57,7 +57,7 @@ export default function PrivacyPolicy() {
       </Section>
 
       <Section title="6. Children's privacy">
-        SpinRoster is a tool for teachers, not for children directly. We do not knowingly collect any personal information from children under 13. Class roster data (student names) is stored only in the teacher's browser and never transmitted to our servers.
+        ClassroomWheel is a tool for teachers, not for children directly. We do not knowingly collect any personal information from children under 13. Class roster data (student names) is stored only in the teacher's browser and never transmitted to our servers.
       </Section>
 
       <Section title="7. Third-party links">
@@ -69,7 +69,7 @@ export default function PrivacyPolicy() {
       </Section>
 
       <Section title="9. Contact">
-        For any privacy-related questions, contact us at: <a href="mailto:privacy@spinroster.com" style={{ color: "#6a64ff" }}>privacy@spinroster.com</a>
+        For any privacy-related questions, contact us at: <a href="mailto:privacy@classroomwheel.com" style={{ color: "#6a64ff" }}>privacy@classroomwheel.com</a>
       </Section>
     </main>
   );

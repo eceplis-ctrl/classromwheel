@@ -69,7 +69,7 @@ export default function CookieBanner() {
         {/* Text */}
         <div style={{ flex: 1, minWidth: 260 }}>
           <p style={{ margin: "0 0 6px", fontSize: 14, color: "#f0f0ff", lineHeight: 1.5 }}>
-            We use cookies to display advertisements that help keep SpinRoster free.
+            We use cookies to display advertisements that help keep ClassroomWheel free.
             {" "}
             <button
               onClick={() => setShowDetails(v => !v)}
